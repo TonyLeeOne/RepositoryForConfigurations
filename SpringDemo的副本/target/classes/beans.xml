@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+  <!--<bean id="hello" class="daemon.helloworld" scope="singleton">-->
+    <!--如果作用域设置为 singleton，那么 Spring IoC 容器刚好创建一个由该 bean 定义的对象的实例。该单一实例将存储在这种单例 bean 的高速缓存中，以及针对该 bean 的所有后续的请求和引用都返回缓存对象。-->
+<!--如果作用域设置为 prototype，那么每次特定的 bean 发出请求时 Spring IoC 容器就创建对象的新的 Bean 实例。一般说来，满状态的 bean 使用 prototype 作用域和没有状态的 bean 使用 singleton 作用域。-->
+  <!--<bean id="helloWorld" class="daemon.HelloWorld" init-method="init" destroy-method="destroy" parent="beanTemplate1">-->
+
+  <!--</bean>-->
+  <bean id="helloChina" class="daemon.HelloChina" parent="beanTemplate">
+
+  </bean>
+<context:annotation-config></context:annotation-config>
+  <bean id="beanTemplate" abstract="true">
+    <property name="message1" value="Hello Tony"/>
+    <property name="message" value="Hello World"/>
+  </bean>
+
+  <!--<bean id="beanTemplate1" abstract="true">-->
+    <!--<property name="message" value="Hello World1"/>-->
+  <!--</bean>-->
+
+  <bean id="spellChecker" class="daemon.SpellChecker">
+  </bean>
+<!--基於構造函數的依賴注入配置-->
+ <!--&lt;!&ndash; <bean id="textEditor" class="daemon.TextEditor">-->
+    <!--&lt;!&ndash;针对class的配置&ndash;&gt;-->
+    <!--<constructor-arg ref="spellChecker"></constructor-arg>-->
+    <!--&lt;!&ndash;针对基本数据类型的配置&ndash;&gt;-->
+    <!--&lt;!&ndash;<constructor-arg type="int" value="2000"></constructor-arg>&ndash;&gt;-->
+    <!--&lt;!&ndash;<constructor-arg type="java.lang.String" value="年"></constructor-arg>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;使用index传递参数，被认为是最好的方式&ndash;&gt;-->
+    <!--<constructor-arg index="1" value="2000"></constructor-arg>-->
+    <!--<constructor-arg index="2" value="年"></constructor-arg>-->
+  <!--</bean>&ndash;&gt;-->
+
+  <!--<bean id="textEditor" class="daemon.TextEditor">-->
+    <!--&lt;!&ndash;基於設置函數的注入&ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="spellChecker" ref="spellChecker"></property>&ndash;&gt;-->
+    <!--<property name="spellChecker">-->
+      <!--<bean id="spellChecker" class="daemon.SpellChecker"></bean>-->
+    <!--</property>-->
+    <!--<property name="num" value="2000"/>-->
+    <!--<property name="s" value="年"/>-->
+  <!--</bean>-->
+
+  <bean id="textEditor" class="daemon.TextEditor">
+    <!--基於設置函數的注入-->
+    <!--<property name="spellChecker" ref="spellChecker"></property>-->
+    <!--<property name="spellChecker">-->
+      <!--<bean id="spellChecker" class="daemon.SpellChecker"></bean>-->
+    <!--</property>-->
+    <!--<property name="num" value="2000"/>-->
+    <!--<property name="s" value="年"/>-->
+  </bean>
+
+  <bean id="javaCollection" class="daemon.JavaCollection">
+    <!--注入list集合到bean中-->
+    <property name="addressList">
+      <list>
+        <value>China</value>
+        <value>India</value>
+        <value>Canada</value>
+        <value>Amercia</value>
+      </list>
+    </property>
+
+    <!--注入set集合到bean中-->
+    <property name="addressSet">
+      <set>
+        <value>China</value>
+        <value>India</value>
+        <value>Canada</value>
+        <value>Amercia</value>
+      </set>
+    </property>
+
+    <!--注入map集合到bean中-->
+    <property name="addressMap">
+      <map>
+        <entry key="1" value="China"></entry>
+        <entry key="2" value="India"></entry>
+        <entry  key="3" value="Canada"></entry>
+        <entry  key="4" value="Amercia"></entry>
+      </map>
+    </property>
+
+    <!--注入map集合到bean中-->
+    <property name="addressProp">
+      <props>
+        <prop key="1" >China</prop>
+        <prop key="2" >India</prop>
+        <prop  key="3" >Canada</prop>
+        <prop  key="4" >Amercia</prop>
+      </props>
+    </property>
+
+  </bean>
+  <bean id="student" class="daemon.Student">
+    <property name="age" value="23"></property>
+    <property name="name" value="Tony"></property>
+
+  </bean>
+
+  <bean id="springEventStartedHandler" class="daemon.SpringStartEventHandler"></bean>
+  <bean id="springEventStoppedHandler" class="daemon.SpringStopEventHandler"></bean>
+
+
+</beans>
